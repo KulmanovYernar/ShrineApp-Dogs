@@ -32,14 +32,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/shr_product_title"
-                android:textAppearance="?attr/textAppearanceHeadline6" />
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textAppearance="?attr/textAppearanceSubtitle2" />
 
             <TextView
                 android:id="@+id/product_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="@string/shr_product_description"
-                android:textAppearance="?attr/textAppearanceBody2" />
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
