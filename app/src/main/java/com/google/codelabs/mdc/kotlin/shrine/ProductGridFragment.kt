@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.codelabs.mdc.kotlin.shrine.databinding.ShrProductGridFragmentBinding
+import com.google.codelabs.mdc.kotlin.shrine.network.ProductEntry
 
 class ProductGridFragment : Fragment() {
 private lateinit var binding: ShrProductGridFragmentBinding
@@ -19,8 +22,17 @@ private lateinit var binding: ShrProductGridFragmentBinding
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
-        binding = ShrProductGridFragmentBinding.inflate(inflater)
+        binding = ShrProductGridFragmentBinding.inflate(inflater,container,false)
         (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
+
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = GridLayoutManager(context,2,RecyclerView.VERTICAL, false)
+        val adapter = ProductCardRecyclerViewAdapter(ProductEntry.initProductEntryList(resources))
+        binding.recyclerView.adapter = adapter
+        val largePadding = resources.getDimensionPixelSize(R.dimen.shr_product_grid_spacing)
+        val smallPadding = resources.getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small)
+        binding.recyclerView.addItemDecoration(ProductGridItemDecoration(largePadding,smallPadding))
+
         return binding.root
     }
 
