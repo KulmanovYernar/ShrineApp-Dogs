@@ -36,10 +36,10 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:id="@+id/product_grid"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
         android:elevation="6dp"
-        android:visibility="gone"
         android:background="@color/productGridBackgroundColor"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:ignore="UnusedAttribute">

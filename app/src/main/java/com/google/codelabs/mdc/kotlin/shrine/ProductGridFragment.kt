@@ -1,5 +1,7 @@
 package com.google.codelabs.mdc.kotlin.shrine
 
+import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -20,6 +22,7 @@ private lateinit var binding: ShrProductGridFragmentBinding
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         // Inflate the layout for this fragment
@@ -40,6 +43,10 @@ private lateinit var binding: ShrProductGridFragmentBinding
         val smallPadding = resources.getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small)
         binding.recyclerView.addItemDecoration(ProductGridItemDecoration(largePadding,smallPadding))
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            binding.productGrid?.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
+        }
         return binding.root
     }
 
