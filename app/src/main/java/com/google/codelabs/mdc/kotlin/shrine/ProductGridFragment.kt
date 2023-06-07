@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,14 +31,14 @@ private lateinit var binding: ShrProductGridFragmentBinding
         (activity as AppCompatActivity).setSupportActionBar(binding.appBar)
 
         binding.recyclerView.setHasFixedSize(true)
-        val gridLayoutManager = GridLayoutManager(context,2,RecyclerView.HORIZONTAL, false)
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position % 3 == 2) 2 else 1
-            }
-        }
+        val gridLayoutManager = GridLayoutManager(context,2,RecyclerView.VERTICAL, false)
+//        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+//            override fun getSpanSize(position: Int): Int {
+//                return if (position % 3 == 2) 2 else 1
+//            }
+//        }
         binding.recyclerView.layoutManager = gridLayoutManager
-        val adapter = StaggeredProductCardRecyclerViewAdapter(ProductEntry.initProductEntryList(resources))
+        val adapter = ProductCardRecyclerViewAdapter(ProductEntry.initProductEntryList(resources))
         binding.recyclerView.adapter = adapter
         val largePadding = resources.getDimensionPixelSize(R.dimen.shr_product_grid_spacing)
         val smallPadding = resources.getDimensionPixelSize(R.dimen.shr_product_grid_spacing_small)
@@ -47,6 +48,12 @@ private lateinit var binding: ShrProductGridFragmentBinding
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             binding.productGrid?.background = context?.getDrawable(R.drawable.shr_product_grid_background_shape)
         }
+
+        binding.appBar.setNavigationOnClickListener (binding.productGrid?.let {
+            NavigationIconClickListener(requireActivity(),
+                it, AccelerateDecelerateInterpolator()
+            )
+        })
         return binding.root
     }
 
