@@ -19,7 +19,7 @@ class LoginFragment : Fragment(){
         // Inflate the layout for this fragment
 
         // Snippet from "Navigate to the next Fragment" section goes here.
-        binding = ShrLoginFragmentBinding.inflate(layoutInflater)
+        binding = ShrLoginFragmentBinding.inflate(layoutInflater, container, false)
         val view = binding.root
 
         binding.nextButton.setOnClickListener{
